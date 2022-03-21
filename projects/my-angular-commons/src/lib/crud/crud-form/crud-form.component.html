@@ -1,0 +1,44 @@
+
+<form class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngIf="createSuccess || updateSuccess" class="message">
+        <span *ngIf="createSuccess">ایجاد با موفقیت انجام شد.</span>
+        <span *ngIf="updateSuccess">بروزرسانی با موفقیت انجام شد.</span>
+        <button mat-icon-button (click)="createSuccess = false; updateSuccess = false;">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div *ngFor="let fc of params.fieldConfigs">
+        <div [ngSwitch]="fc.type">
+            <div *ngSwitchCase="fieldType.TEXT">
+                <mat-form-field>
+                    <input matInput placeholder="{{fc.displayText}}" [formControlName]="fc.name" type="text"/>
+                </mat-form-field>
+            </div>
+            <div *ngSwitchCase="fieldType.TEXT_AREA">
+                <mat-form-field>
+                    <textarea matInput placeholder="{{fc.displayText}}" [formControlName]="fc.name" type="text"></textarea>
+                </mat-form-field>
+            </div>
+            <div *ngSwitchCase="fieldType.RADIO">
+                <span>{{fc.displayText}}</span>
+                <mat-radio-group [formControlName]="fc.name">
+                    <mat-radio-button *ngFor="let val of fc.values" value="{{val.value}}">{{val.text}}</mat-radio-button>                    
+                </mat-radio-group>                
+            </div>
+            <div *ngSwitchCase="fieldType.SELECT">
+                <mat-form-field>
+                    <mat-select [formControlName]="fc.name" placeholder="{{fc.displayText}}">
+                        <mat-option *ngFor="let val of fc.values" value="{{val.value}}">{{val.text}}</mat-option>                    
+                    </mat-select>   
+                </mat-form-field>             
+            </div>
+            <div *ngSwitchDefault>
+                <span>نوع فیلد قابل نمایش نیست</span>  
+                <span>{{fc.type}}</span>
+            </div>
+
+        </div>
+    </div>
+
+    <button color="primary" mat-raised-button type="submit" [disabled]="!form.valid">{{params.labels.submit}}</button>
+</form>

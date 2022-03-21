@@ -3,5 +3,46 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "my-angular-commons": {
+      "projectType": "library",
+      "root": "projects/my-angular-commons",
+      "sourceRoot": "projects/my-angular-commons/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/my-angular-commons/tsconfig.lib.json",
+            "project": "projects/my-angular-commons/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/my-angular-commons/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-angular-commons/src/test.ts",
+            "tsConfig": "projects/my-angular-commons/tsconfig.spec.json",
+            "karmaConfig": "projects/my-angular-commons/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/my-angular-commons/tsconfig.lib.json",
+              "projects/my-angular-commons/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "my-angular-commons"
 }

@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+    /*padding: 15px;*/
+    background-color: #ffffff;
+    border-spacing: 0;
+}
+
+td {
+    padding: 10px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e0e0e0;	
+    
+}
+
+td:nth-child(odd) {
+    font-weight: bold;
+    background-color: #f7f7f7;
+}

@@ -1,0 +1,31 @@
+.form-container {
+    margin: 25px;
+}
+
+.form-container > button {
+    margin: 25px 0 25px 0;
+}
+.mat-form-field {
+    width: 100%;
+}
+
+.message {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+    border-radius: 5px;
+    margin-bottom: 25px;
+}
+
+.message span {
+    line-height: 40px;
+    margin: 16px;
+}
+
+.message button {
+    float: left;
+}
+
+.mat-radio-button {
+    margin-right: 25px;
+}

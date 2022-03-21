@@ -1,0 +1,26 @@
+<div *ngIf="entity">
+    <table>
+        <tr  *ngFor="let fc of params.fieldConfigs">
+            <ng-container [ngSwitch]="fc.type">
+                <ng-container *ngSwitchCase="fc.type === fieldType.TEXT || fc.type === fieldType.TEXT_AREA ? fc.type : ''">
+                    <td style="width:30%">{{fc.displayText}}</td>
+                    <td style="width:70%">{{entity[fc.name]}}</td>
+                </ng-container>
+                <ng-container *ngSwitchCase="fieldType.SELECT">
+                    <td>{{fc.displayText}}</td>
+                    <td>{{valueToText(fc.values, entity[fc.name])}}</td>
+                </ng-container>
+                <ng-container *ngSwitchCase="fieldType.RADIO">
+                    <td>{{fc.displayText}}</td>
+                    <td>{{valueToText(fc.values, entity[fc.name])}}</td>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <td>نوع فیلد قابل نمایش نیست</td>  
+                    <td>{{fc.type}}</td>
+                </ng-container>
+
+            </ng-container>
+        </tr>
+    </table>
+</div>
+
