@@ -20,14 +20,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
-
 import {MatDatepickerModule, } from '@angular/material/datepicker';
 import { getPersianPaginatorIntl } from "../crud/utils/persian-paginator-intl";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { SearchableSelectComponent } from './searchable-select/searchable-select.component';
+import {MatTreeModule} from '@angular/material/tree';
 
 @NgModule({
   exports: [
@@ -54,7 +53,8 @@ import { SearchableSelectComponent } from './searchable-select/searchable-select
     MatCheckboxModule,
     MatMenuModule,
     MatBadgeModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTreeModule
   ],
   providers: [
     { provide: DateAdapter, useClass: MaterialPersianDateAdapter, deps: [MAT_DATE_LOCALE] },

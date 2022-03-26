@@ -1,13 +1,13 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError } from "rxjs/operators";
-import { ErrorMessageHandlerService } from "./error-message-handler/error-message-handler.service";
+import { IErrorMessageHandler } from "../crud/interfaces/IErrorMessageHandler";
 
 export class BaseService {
 
     protected baseUrl;  
 
     constructor(private httpClient: HttpClient,
-        private errorMessageHandlerService: ErrorMessageHandlerService) {
+        private errorMessageHandlerService: IErrorMessageHandler) {
         
     }
 

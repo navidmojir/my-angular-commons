@@ -14,3 +14,4 @@ export * from './lib/crud/enums/field-type';
 export * from './lib/crud/enums/operations';
 export * from './lib/crud/services/snackbar-helper/snackbar-helper.service';
 export * from './lib/loading-helper/services/spinner-interceptor';
+export * from './lib/services/base.service';
