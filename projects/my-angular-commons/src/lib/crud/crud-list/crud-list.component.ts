@@ -1,12 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 import { CrudParams } from '../dto/crud-params';
-import { FieldConfig } from '../dto/field-config';
-import { FieldType } from '../enums/field-type';
 import { Operation } from '../enums/operations';
 import { PanelType } from '../enums/panel-type';
 import { DataService } from '../services/data-service/data.service';
@@ -44,9 +41,13 @@ export class CrudListComponent implements OnInit {
 
   @Input() params: CrudParams= {} as any; 
 
+  @Input() prefix: string = "1";
+
   dialogRef: MatDialogRef<ConfirmationDialogComponent> = {} as any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as any;
+
+  sort;
 
   constructor(private dataService: DataService,
     public dialog: MatDialog,
@@ -61,9 +62,13 @@ export class CrudListComponent implements OnInit {
     this.dataService.setResourceName(this.params.resourceName);
     this.dataService.setErrorMsgHandler(this.params.errorMessageHandler);
     this.dataService.setSearchMethod(this.params.searchMethod);
+
+    this.initializeSorting();
+    this.initializePaging();    
+
     if(this.entities.length == 0)
       this.getDataFromBackend();
-    
+
     for(var fc of this.params.fieldConfigs)
     {
       if(fc.showOnList == true)
@@ -73,6 +78,9 @@ export class CrudListComponent implements OnInit {
   }
 
   reload(): void {
+    this.setToLocalStorage('sorting', this.sorting);
+    this.setToLocalStorage('paging', this.paging);
+    this.setToLocalStorage('filters', this.filters);
     this.getDataFromBackend();
   }
 
@@ -82,10 +90,9 @@ export class CrudListComponent implements OnInit {
     this.reload();
   }
 
-  private getDataFromBackend(): void {
+  private getDataFromBackend(): void {    
     this.dataService.list(this.filters, this.paging, this.sorting).subscribe(
       (result: any) => {
-        // console.log(result);
         this.entities = result.body;        
         this.paginator.length = +result.headers.get(this.params.totalPagesHeaderName);	      
     }
@@ -137,13 +144,9 @@ export class CrudListComponent implements OnInit {
   }
   
   applySorting(ev: any): void {
-    //console.log('sorting triggered!');
-    console.log(ev);
 		if(ev.direction == '')
 		{
 			this.sorting = null;
-			this.removeQueryParam('sortField');
-			this.removeQueryParam('direction');
 		}
 		else
 		{
@@ -151,9 +154,9 @@ export class CrudListComponent implements OnInit {
 				sortField: ev.active,
 				ascending: (ev.direction == 'asc' ? true : false)
 			};
-			this.addQueryParam('sortField', this.sorting['sortField']);
-			this.addQueryParam('direction', ev.direction);
 		}
+
+    this.setToLocalStorage('sorting', this.sorting);
 
 		if(this.onInitSort == true)  //to prevent calling backend twice on page load when setting sort fields
 			this.onInitSort = false;
@@ -161,36 +164,12 @@ export class CrudListComponent implements OnInit {
 			this.getDataFromBackend();
   }
   
-  addQueryParam(name: string, value: string): void {
-		let param: any = {};
-		param[name]=value;
-		
-		let newData = Object.assign({}, this.queryParams, param);
-		this.queryParams = newData;
-		this.router.navigate(
-			[], {
-				relativeTo: this.activatedRoute,
-				queryParams: this.queryParams
-			}
-		);
-	}
-	
-	removeQueryParam(name: string): void {
-		let param: any = {};
-		param[name]=null;
-		
-		let newData = Object.assign({}, this.queryParams, param);
-		this.queryParams = newData;
-		this.router.navigate([], {queryParams: this.queryParams});
-  }
-  
   applyPaging(pageEvent: PageEvent): void {
 	
 		this.paging['pageNumber'] = pageEvent.pageIndex;
 		this.paging['pageSize'] = pageEvent.pageSize;
 		
-		this.addQueryParam('pageNumber', this.paging['pageNumber']);
-		this.addQueryParam('pageSize', this.paging['pageSize']);
+    this.setToLocalStorage("paging", this.paging);
 		
 		this.getDataFromBackend();
 	}
@@ -206,4 +185,42 @@ export class CrudListComponent implements OnInit {
     return "unsupported field name";
   }
 
+  private setToLocalStorage(key: string, value): void {
+    localStorage.setItem(this.prefix + key, JSON.stringify(value));
+  }
+
+  private getFromLocalStorage(key: string): any {
+    return JSON.parse(localStorage.getItem(this.prefix + key));
+  }
+
+  private initializeSorting() {
+    this.sorting = this.getFromLocalStorage("sorting");
+    if(this.sorting == null)
+    {
+      this.sort = {
+        direction: '',
+        active: ''
+      };
+      return;
+    }
+
+    this.sort = {
+      direction: this.sorting['ascending'] ? 'asc' : 'desc',
+      active: this.sorting['sortField']
+    };
+  }
+
+  private initializePaging() {
+    this.paging = this.getFromLocalStorage("paging");
+    if(this.paging == null)
+    {
+      this.paging = {};
+      return;
+    }
+  }
+
+  
 }
+
+
+

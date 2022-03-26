@@ -29,7 +29,6 @@ export class CrudParams {
         this._totalPagesHeaderName = "X-TOTAL-COUNT";
         this._customRecordActions = [];
         this._customGeneralActions = [];
-		this._searchMethod = "/search";
     }
 
 

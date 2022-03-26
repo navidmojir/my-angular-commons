@@ -14,7 +14,7 @@
 
         <mat-divider></mat-divider>
             
-        <table mat-table matSort (matSortChange)="applySorting($event)" [dataSource]="entities" >
+        <table mat-table matSort (matSortChange)="applySorting($event)" [matSortActive]="sort.active" [matSortDirection]="sort.direction" [dataSource]="entities" >
             <ng-container *ngFor="let fc of params.fieldConfigs">   
                 <ng-container matColumnDef="{{fc.name}}">
                     <mat-header-cell *matHeaderCellDef [mat-sort-header]="fc.sortHeader ? fc.name : 'false'" [disabled]="fc.sortHeader ? false : true">{{fc.displayText}}</mat-header-cell>
@@ -48,7 +48,8 @@
 
         </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="applyPaging($event)"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons 
+                (page)="applyPaging($event)" [pageIndex]="paging.pageNumber" [pageSize]="paging.pageSize"></mat-paginator>
     </div>
 
     <div *ngIf="currentPanel != panelType.LIST">

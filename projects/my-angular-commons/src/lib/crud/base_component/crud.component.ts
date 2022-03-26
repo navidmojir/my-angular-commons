@@ -21,6 +21,12 @@ export class CrudComponent implements OnInit {
 
   @Input() filters: any;
 
+  /**
+   * This prefix must be set properly to prevent conflict in local storage keys.
+   * Note that prefix is prepended to keys like 'paging' or 'sorting' in browser local storage. 
+   */
+  @Input() prefix: string = "1";
+
   @ViewChild(CrudListComponent) crudListComponent: CrudListComponent;
 
   constructor() {  
