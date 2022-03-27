@@ -7,7 +7,8 @@ export class BaseService {
     protected baseUrl;  
 
     constructor(private httpClient: HttpClient,
-        private errorMessageHandlerService: IErrorMessageHandler) {
+        private errorMessageHandlerService: IErrorMessageHandler,
+        private resourceName: string) {
         
     }
 
@@ -47,5 +48,26 @@ export class BaseService {
         return this.httpClient.delete(this.baseUrl + path).pipe(
               catchError((error) => this.handleError(error))
         );
+    }
+
+    public create(entity) {
+        return this.post('/' + this.resourceName, entity);
+    }
+
+    public retrieve(id) {
+        return this.get('/' + this.resourceName + '/' + id);
+    }
+
+    public update(id, entity) {
+        return this.put('/' + this.resourceName + '/' + id, entity);
+    }
+
+    public search(filters, paging, sorting) {
+        let req = {filters: filters, paging: paging, sorting: sorting};
+        return this.post('/' + this.resourceName + '/search', req);
+    }
+
+    public remove(id) {
+        return this.delete('/' + this.resourceName + '/' + id);
     }
 }
