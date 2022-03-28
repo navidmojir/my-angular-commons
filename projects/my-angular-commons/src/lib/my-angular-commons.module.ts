@@ -23,8 +23,7 @@ import { NationalCodeValidatorDirective } from './utils/national-code-validator'
     ConfirmationDialogComponent,
     SpinnerOverlayComponent,
     JalaliPipe,
-    JalaliTimePipe,
-    EnumTranslatorPipe,
+    JalaliTimePipe,    
     NationalCodeValidatorDirective,
   ],
   imports: [
@@ -34,9 +33,7 @@ import { NationalCodeValidatorDirective } from './utils/national-code-validator'
   ],
   exports: [
     MaterialModule,
-    CrudComponent,    
-    // JalaliTimePipe,
-    // CrudParams
+    CrudComponent,
   ]
 })
 export class MyAngularCommonsModule { }
