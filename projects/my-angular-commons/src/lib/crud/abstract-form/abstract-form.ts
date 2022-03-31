@@ -12,9 +12,9 @@ export abstract class AbstractForm {
 
     editing = false;
 
-    constructor(private route: ActivatedRoute,
+    constructor(protected route: ActivatedRoute,
         private service: BaseService,
-        private router: Router) {
+        protected router: Router) {
 
     }
 
