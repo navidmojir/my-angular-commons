@@ -6,8 +6,8 @@ import { ConfirmationDialogComponent } from './crud/confirmation-dialog/confirma
 import { CrudDetailsComponent } from './crud/crud-details/crud-details.component';
 import { CrudFormComponent } from './crud/crud-form/crud-form.component';
 import { CrudListComponent } from './crud/crud-list/crud-list.component';
+import { ErrorDialogComponent } from './crud/error-dialog/error-dialog.component';
 import { SpinnerOverlayComponent } from './loading-helper/components/spinner-overlay.component';
-import { EnumTranslatorPipe } from './pipes/enum-translator.pipe';
 import { JalaliPipe, JalaliTimePipe } from './pipes/jalali.pipe';
 import { MaterialModule } from './utils/material.module';
 import { NationalCodeValidatorDirective } from './utils/national-code-validator';
@@ -25,6 +25,7 @@ import { NationalCodeValidatorDirective } from './utils/national-code-validator'
     JalaliPipe,
     JalaliTimePipe,    
     NationalCodeValidatorDirective,
+    ErrorDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -34,6 +35,8 @@ import { NationalCodeValidatorDirective } from './utils/national-code-validator'
   exports: [
     MaterialModule,
     CrudComponent,
+    JalaliPipe,
+    JalaliTimePipe
   ]
 })
 export class MyAngularCommonsModule { }

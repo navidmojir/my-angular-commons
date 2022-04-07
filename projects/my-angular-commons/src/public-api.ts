@@ -16,3 +16,7 @@ export * from './lib/crud/services/snackbar-helper/snackbar-helper.service';
 export * from './lib/loading-helper/services/spinner-interceptor';
 export * from './lib/services/base.service';
 export * from './lib/crud/abstract-form/abstract-form';
+export * from './lib/crud/error-dialog/error-dialog.component';
+export * from './lib/crud/interfaces/IErrorMessageHandler';
+export * from './lib/services/helpers/blob-helpers.service';
+export * from './lib/crud/dto/label-config';
