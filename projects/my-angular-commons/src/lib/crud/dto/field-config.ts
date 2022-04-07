@@ -10,4 +10,5 @@ export class FieldConfig {
     sortHeader: boolean = false;
     values: any[] = [];
     valueTransformer = (value) => { return value };
+    style = (value) => {return {}};
 }

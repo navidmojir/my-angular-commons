@@ -18,7 +18,7 @@
             <ng-container *ngFor="let fc of params.fieldConfigs">   
                 <ng-container matColumnDef="{{fc.name}}">
                     <mat-header-cell *matHeaderCellDef [mat-sort-header]="fc.sortHeader ? fc.name : 'false'" [disabled]="fc.sortHeader ? false : true">{{fc.displayText}}</mat-header-cell>
-                    <mat-cell *matCellDef="let element">{{fc.valueTransformer(get(element, fc))}}</mat-cell>
+                    <mat-cell [ngStyle]="fc.style(get(element, fc))" *matCellDef="let element">{{fc.valueTransformer(get(element, fc))}}</mat-cell>
                 </ng-container>
             </ng-container>
 
