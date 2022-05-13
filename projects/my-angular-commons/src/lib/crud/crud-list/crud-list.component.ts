@@ -178,10 +178,16 @@ export class CrudListComponent implements OnInit {
     let names = fieldConf.name.split('.');
     if(names.length == 1)
       return element[names[0]];
-    if(names.length == 2)
+    if(names.length == 2) {
+      if(element[names[0]] == null)
+        return null;
       return element[names[0]][names[1]];
-    if(names.length == 3)
+    }
+    if(names.length == 3) {
+      if(element[names[0]] == null || element[names[0]][names[1]] == null)
+        return null;
       return element[names[0]][names[1]][names[2]];
+    }
     return "unsupported field name";
   }
 
