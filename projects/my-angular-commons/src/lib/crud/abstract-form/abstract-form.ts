@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from "@angular/router";
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { BaseService } from "../../services/base.service";
 
 export abstract class AbstractForm {
@@ -12,21 +12,22 @@ export abstract class AbstractForm {
 
     editing = false;
 
+    entity;
+
     constructor(protected route: ActivatedRoute,
         private service: BaseService,
         protected router: Router) {
 
     }
 
-    protected init() {
+    protected init(callbackFunc?) {
         this.id = +this.route.snapshot.paramMap.get("id");
 
         if (this.id == 0)
             this.setEditMode(true);
 
         if (this.id != 0) {
-            this.setEditMode(false);
-            this.loadEntityOnForm();
+            this.loadEntityOnForm(callbackFunc);
         }
     }
 
@@ -38,9 +39,14 @@ export abstract class AbstractForm {
             this.getFormGroup().disable();
     }
 
-    private loadEntityOnForm() {
+    private loadEntityOnForm(callbackFunc) {
         this.service.retrieve(this.id).subscribe(
-            (result) => this.getFormGroup().patchValue(result)
+            (result) => {
+                this.entity = result;
+                callbackFunc();
+                this.getFormGroup().patchValue(result);
+                this.setEditMode(false);
+            }
         );
     }
 
@@ -67,6 +73,25 @@ export abstract class AbstractForm {
             this.router.navigate([this.getResourceRoute()]);
         else {
             this.setEditMode(false);
+        }
+    }
+
+    deleteRecord(arr, i: number) {
+        arr.removeAt(i);
+    }
+
+    initializeFormArray(formArray, entities, addFunc): void {
+        this.clearFormArray(formArray);
+        if (entities != null) {
+            for (let entry of entities) {
+            addFunc(this);
+            }
+        }
+    }
+    
+    clearFormArray(formArray: FormArray): void {
+        while (formArray.length !== 0) {
+            formArray.removeAt(0);
         }
     }
 
