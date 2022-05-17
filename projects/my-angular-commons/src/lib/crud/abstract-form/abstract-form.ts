@@ -43,7 +43,8 @@ export abstract class AbstractForm {
         this.service.retrieve(this.id).subscribe(
             (result) => {
                 this.entity = result;
-                callbackFunc();
+                if(callbackFunc)
+                    callbackFunc();
                 this.getFormGroup().patchValue(result);
                 this.setEditMode(false);
             }
