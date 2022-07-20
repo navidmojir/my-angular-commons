@@ -29,14 +29,16 @@
                         (click)="showDetails(element.id)">{{params.labels.details}}</button>
 
                     <button mat-raised-button *ngIf="operationEnabled(operationType.UPDATE)" 
-                        (click)="edit(element)">{{params.labels.edit}}</button>
+                        (click)="edit(element)" matTooltip="{{params.labels.edit}}"><mat-icon>edit</mat-icon></button>
 
-                    <button mat-raised-button *ngIf="operationEnabled(operationType.DELETE)" 
-                        (click)="delete(element.id)">{{params.labels.delete}}</button>
+                    <button mat-icon-button *ngIf="operationEnabled(operationType.DELETE)" 
+                        (click)="delete(element.id)" matTooltip="{{params.labels.delete}}"><mat-icon>delete</mat-icon></button>
 
                     <ng-container *ngFor="let customAction of params.customRecordActions">
-                        <button mat-raised-button  
+                        <button mat-raised-button  *ngIf="!customAction.icon"
                             (click)="customAction.onClick(element)">{{customAction.title}}</button>
+                        <button mat-icon-button  *ngIf="customAction.icon" matTooltip="{{customAction.title}}"
+                            (click)="customAction.onClick(element)"><mat-icon>{{customAction.icon}}</mat-icon></button>
                     </ng-container>
                 </mat-cell>
             </ng-container>
