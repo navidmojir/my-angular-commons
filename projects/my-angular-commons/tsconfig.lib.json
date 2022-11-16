@@ -3,7 +3,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
-    "target": "es2015",
+    "target": "es2020",
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
@@ -11,7 +11,8 @@
     "lib": [
       "dom",
       "es2018"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true /*To fix jalali-moment problem*/
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,

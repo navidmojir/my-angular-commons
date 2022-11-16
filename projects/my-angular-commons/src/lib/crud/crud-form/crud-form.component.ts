@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { CrudParams } from '../dto/crud-params';
 import { FieldConfig } from '../dto/field-config';
 import { FieldType } from '../enums/field-type';
@@ -23,7 +23,7 @@ export class CrudFormComponent implements OnInit {
   //@Input() entity: any = []; 
   @Input() entity: any = []; 
 
-  form: FormGroup = {} as any;
+  form: UntypedFormGroup = {} as any;
 
   constructor(private formService: FormService,
     private dataService: DataService) { }

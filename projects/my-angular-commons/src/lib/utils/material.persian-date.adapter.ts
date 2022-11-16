@@ -1,5 +1,5 @@
 import { DateAdapter } from "@angular/material/core";
-import * as jalaliMoment from "jalali-moment";
+import jalaliMoment from "jalali-moment";
 
 export const PERSIAN_DATE_FORMATS = {
   parse: {

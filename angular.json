@@ -28,21 +28,11 @@
             "tsConfig": "projects/my-angular-commons/tsconfig.spec.json",
             "karmaConfig": "projects/my-angular-commons/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/my-angular-commons/tsconfig.lib.json",
-              "projects/my-angular-commons/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     }
   },
-  "defaultProject": "my-angular-commons"
+  "cli": {
+    "analytics": false
+  }
 }

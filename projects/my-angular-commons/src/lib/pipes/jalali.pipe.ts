@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as moment from 'jalali-moment';
+import moment from 'jalali-moment';
 
 // convert epoch to shamsi
 @Pipe({

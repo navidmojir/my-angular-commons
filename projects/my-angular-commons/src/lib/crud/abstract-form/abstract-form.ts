@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from "@angular/router";
-import { FormArray, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { BaseService } from "../../services/base.service";
 
 export abstract class AbstractForm {
@@ -90,12 +90,12 @@ export abstract class AbstractForm {
         }
     }
     
-    clearFormArray(formArray: FormArray): void {
+    clearFormArray(formArray: UntypedFormArray): void {
         while (formArray.length !== 0) {
             formArray.removeAt(0);
         }
     }
 
     protected abstract getResourceRoute(): string;
-    protected abstract getFormGroup(): FormGroup;
+    protected abstract getFormGroup(): UntypedFormGroup;
 }
