@@ -20,3 +20,6 @@ export * from './lib/crud/error-dialog/error-dialog.component';
 export * from './lib/crud/interfaces/IErrorMessageHandler';
 export * from './lib/services/helpers/blob-helpers.service';
 export * from './lib/crud/dto/label-config';
+export * from './lib/utils/national-code-validator'
+
+export { HttpErrorResponse } from "@angular/common/http";

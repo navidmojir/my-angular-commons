@@ -36,7 +36,8 @@ import { NationalCodeValidatorDirective } from './utils/national-code-validator'
     MaterialModule,
     CrudComponent,
     JalaliPipe,
-    JalaliTimePipe
+    JalaliTimePipe,
+    NationalCodeValidatorDirective
   ]
 })
 export class MyAngularCommonsModule { }

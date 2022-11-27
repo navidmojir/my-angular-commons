@@ -2,12 +2,12 @@
   "name": "my-angular-commons",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^11.0.9",
-    "@angular/core": "^11.0.9",
-    "@angular/material": "^11.0.3",
-    "jalali-moment": "^3.3.10",
-    "@angular/forms": "^11.0.4",
-    "@angular/cdk": "^11.0.4"
+    "@angular/common": "^14.2.10",
+    "@angular/core": "^14.2.10",
+    "@angular/material": "^14.2.7",
+    "jalali-moment": "^3.3.11",
+    "@angular/forms": "^14.2.10",
+    "@angular/cdk": "^14.2.7"
   },
   "dependencies": {
     "tslib": "^2.0.0"
