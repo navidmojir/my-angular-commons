@@ -20,8 +20,8 @@ export class BaseService {
         this.baseUrl = baseUrl;
     }
 
-    protected post(path, body) {
-        return this.httpClient.post(this.baseUrl + path, body).pipe(
+    protected post(path, body, options?) {
+        return this.httpClient.post(this.baseUrl + path, body, options).pipe(
               catchError((error) => this.handleError(error))
         );
     }
