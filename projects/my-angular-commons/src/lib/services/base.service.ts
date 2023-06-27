@@ -26,8 +26,8 @@ export class BaseService {
         );
     }
 
-    protected get(path) {
-        return this.httpClient.get(this.baseUrl + path).pipe(
+    protected get(path, options?) {
+        return this.httpClient.get(this.baseUrl + path, options).pipe(
             catchError((error) => this.handleError(error))
       );
     }
