@@ -16,6 +16,7 @@ export class CrudParams {
     private _totalPagesHeaderName: string;
     private _customRecordActions: CustomAction[];
     private _customGeneralActions: CustomAction[];
+	private _showToolbar: boolean;
 
     constructor(resourceName: string, fieldConfigs: FieldConfig[]) {
         this._baseUrl = "http://localhost:8080/";
@@ -30,6 +31,7 @@ export class CrudParams {
         this._customRecordActions = [];
         this._customGeneralActions = [];
 		this._searchMethod = "/search";
+		this._showToolbar = true;
     }
 
 
@@ -125,6 +127,14 @@ export class CrudParams {
 
 	public set customGeneralActions(value: CustomAction[]) {
 		this._customGeneralActions = value;
+	}
+
+	public get showToolbar(): boolean {
+		return this._showToolbar;
+	}
+
+	public set showToolbar(value: boolean) {
+		this._showToolbar = value;
 	}
 
 }

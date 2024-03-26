@@ -58,10 +58,7 @@ export class CrudListComponent implements OnInit {
   ngOnInit(): void {
     // this.displayedCols = ['front', 'back'];
 
-    this.dataService.setBaseUrl(this.params.baseUrl);
-    this.dataService.setResourceName(this.params.resourceName);
-    this.dataService.setErrorMsgHandler(this.params.errorMessageHandler);
-    this.dataService.setSearchMethod(this.params.searchMethod);
+    
 
     this.initializeSorting();
     this.initializePaging();    
@@ -90,7 +87,16 @@ export class CrudListComponent implements OnInit {
     this.reload();
   }
 
-  private getDataFromBackend(): void {    
+  //removed from ng init to fix bug when using two components in same page
+  private initDataService() {
+    this.dataService.setBaseUrl(this.params.baseUrl);
+    this.dataService.setResourceName(this.params.resourceName);
+    this.dataService.setErrorMsgHandler(this.params.errorMessageHandler);
+    this.dataService.setSearchMethod(this.params.searchMethod);
+  }
+
+  private getDataFromBackend(): void { 
+    this.initDataService();
     this.dataService.list(this.filters, this.paging, this.sorting).subscribe(
       (result: any) => {
         this.entities = result.body;        
@@ -134,6 +140,7 @@ export class CrudListComponent implements OnInit {
 
 		this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
+        this.initDataService();
         this.dataService.delete(id).subscribe(
           (result: any) => this.reload()
         );
